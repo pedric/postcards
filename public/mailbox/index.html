@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="postcardApp">
+<html ng-app="viewApp">
 <head>
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -16,52 +16,29 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/style.css">
   <!-- Favicon
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body ng-controller="appCtrl" ng-init="postcard = {private: 'false'}">
+<body ng-controller="viewCtrl" style="background-image: url({{ postcard.image }});">
+<h1>Holler</h1>
 
-<div id="bg-slides"></div>
-
-<div id="bg-container" style="background-image: url({{ postcard.image }});">
+<div style="background-image: url({{ postcard.image }});width: 100vw;height:100vh;">
 	<div id="postcard-image-container">
 		<div class="container">
 			<div class="row">
-				<div id="form-container" class="four columns offset-by-one-column">
-					<div>
-						<form action="post">
-							<input class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
-							<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting"></textarea>
-							<input class="u-full-width" placeholder="Your name" ng-model="postcard.name">
-							<input class="u-full-width" placeholder="Your location" ng-model="postcard.location">
-							<!-- <label>
-								<input type="checkbox" ng-model="postcard.private">
-								<span class="label-body">Private postcard</span>
-							</label> -->
-							<div id="hintfield" class="row">
-								<input class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint">
-								<input class="u-full-width" placeholder="Answer" ng-model="postcard.key">
-							</div>
-							<div id="send-icon"><i class="fa fa-paper-plane" aria-hidden="true" ng-click="addPostcard()"></i></div>
-						</form>
+				<div class="four columns offset-by-one-column" style="margin-top: 20px;background: #fff; min-width: 300px;">
+					<div class="container">
+						<p ng-model="view.name">{{ postcard.name }}</p>
 					</div>
 				</div>
 			</div>
+
 		</div>
 	</div>
-</div>
 
-<div style="position: fixed; background: #fff; opacity: 0.5; bottom: 0; right: 0; width: 200px; overflow: scroll;">
-	<!-- Dev notes -->
-	<p>{{ postcard.image }}</p>
-	<p>{{ postcard.greeting }}</p>
-	<p>{{ postcard.name }}</p>
-	<p>{{ postcard.location }}</p>
-	<p>{{ postcard.private }}</p>
-	<p>{{ shareUrl }}</p>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>

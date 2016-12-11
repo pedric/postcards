@@ -10,6 +10,7 @@
 
 /* Table of contents
 ––––––––––––––––––––––––––––––––––––––––––––––––––
+- Authors Custom
 - Grid
 - Base Styles
 - Typography
@@ -25,13 +26,68 @@
 - Media Queries
 */
 
+/* Authors Custom
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+#bg-container {
+  background-image: url(http://fredriklarsson.org/lanka/img/167.jpg);
+  min-height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#bg-slides {
+  position: fixed;
+  background-image: url(http://fredriklarsson.org/lanka/img/167.jpg);
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#form-container {
+  position: relative;
+  margin: 40px 0 0;
+  background: #fff;
+  min-width: 300px;
+}
+
+#form-container form {
+  margin: 0;
+}
+
+#form-container > div {
+  padding: 50px 20px;
+}
+
+#send-icon {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: cadetblue;
+}
+
+#send-icon i {
+  font-size: 40px;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+}
+
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .container {
   position: relative;
   width: 100%;
-  max-width: 960px;
+  /*max-width: 960px;*/
   margin: 0 auto;
   padding: 0 20px;
   box-sizing: border-box; }
@@ -49,9 +105,9 @@
 }
 
 /* For devices larger than 550px */
-@media (min-width: 550px) {
+@media (min-width: 750px) {
   .container {
-    width: 80%; }
+    width: 90%; }
   .column,
   .columns {
     margin-left: 4%; }
