@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -22,49 +22,101 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body ng-controller="appCtrl" ng-init="postcard = {private: 'false'}">
+<body ng-controller="appCtrl">
 
-<div id="bg-slides"></div>
+<!-- Bg-slideshow -->
+<div id="bg-slideshow"></div>
 
-<div id="bg-container" style="background-image: url({{ postcard.image }});">
-	<div id="postcard-image-container">
-		<div class="container">
-			<div class="row">
-				<div id="form-container" class="four columns offset-by-one-column">
-					<div>
-						<form action="post">
-							<input class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
-							<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting"></textarea>
-							<input class="u-full-width" placeholder="Your name" ng-model="postcard.name">
-							<input class="u-full-width" placeholder="Your location" ng-model="postcard.location">
-							<!-- <label>
-								<input type="checkbox" ng-model="postcard.private">
-								<span class="label-body">Private postcard</span>
-							</label> -->
-							<div id="hintfield" class="row">
-								<input class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint">
-								<input class="u-full-width" placeholder="Answer" ng-model="postcard.key">
-							</div>
-							<div id="send-icon"><i class="fa fa-paper-plane" aria-hidden="true" ng-click="addPostcard()"></i></div>
-						</form>
+<!-- Main app -->
+<div class="row app-window" style="background-image: url({{ postcard.image }});">
+
+	<p id="about-btn">About</p>
+
+	<!-- Input field -->
+
+	<div id="main-app-container">
+		<div style="position: relative;">
+			<div id="toggle-container">
+				<form>
+					<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
+					<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;"></textarea>
+					<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name">
+					<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location">
+					<label>
+						<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false">
+						<span class="label-body">Private postcard</span>
+					</label>
+					<div id="hintfield" class="row" ng-show="postcard.private">
+						<input type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
+						<input type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
 					</div>
-				</div>
+					<button id="send-postcard" class="button button-primary u-full-width" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Postcard</button>
+				</form>
 			</div>
 		</div>
 	</div>
-</div>
+	<!-- **************************************************************************************** -->
+	<!--<div id="image-container-start">
+		<div style="background-image: url({{ postcard.image }});"></div>
+	</div>
 
-<div style="position: fixed; background: #fff; opacity: 0.5; bottom: 0; right: 0; width: 200px; overflow: scroll;">
-	<!-- Dev notes -->
-	<p>{{ postcard.image }}</p>
-	<p>{{ postcard.greeting }}</p>
-	<p>{{ postcard.name }}</p>
-	<p>{{ postcard.location }}</p>
-	<p>{{ postcard.private }}</p>
-	<p>{{ shareUrl }}</p>
+	<div id="text-container-start">
+		<div>
+			<div style="position: relative;">
+				<div id="toggle-container">
+					<form>
+						<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
+
+						<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;"></textarea>
+						<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name">
+						<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location">
+						<label>
+							<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false">
+							<span class="label-body">Private postcard</span>
+						</label>
+						<div id="hintfield" class="row" ng-show="postcard.private">
+							<input type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
+							<input type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
+						</div>
+						<button id="send-postcard" class="button button-primary u-full-width" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
+						<div id="send-icon"><i class="fa fa-paper-plane" aria-hidden="true" ng-click="addPostcard()"></i></div>
+					</form>
+					<h1>{{ postcard.key }}</h1>
+				</div>
+			</div>
+		</div>
+	</div>-->
+</div>
+<!-- Show public postcards -->
+<!-- Form to search list -->
+<div id="search-form-container">
+	<div class="row">
+		<div class="eight columns offset-by-two columns">
+			<form id="search-form">
+				<input type="text" style="width: 100%;margin: 0;" ng-model="searchPostcards" ng-keyup="searchPostcards" placeholder="Search postcards...">
+			</form>
+		</div>
+	</div>
+</div>
+<div class="row" style="background-color: #fff;">
+	<div ng-repeat="publicPostcard in postcards | orderBy:sortOption | filter:searchPostcards | limitTo:24">
+		<a href="/mailbox/?id={{ publicPostcard._id}}">
+			<div class="publicThumb" style="height: 200px; background-image: url({{ publicPostcard.image }});">
+				<div class="color-filter"></div>
+				<div class="vh-middle">
+					<h2>{{ publicPostcard.name }}<br />in<br />{{ publicPostcard.location }}</h2>
+				</div>
+			</div>
+		</a>
+	</div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
 <script src="controllers/controller.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

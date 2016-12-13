@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- FONT
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -22,26 +22,57 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body ng-controller="viewCtrl" style="background-image: url({{ postcard.image }});">
-<h1>Holler</h1>
+<body ng-controller="viewCtrl">
 
-<div style="background-image: url({{ postcard.image }});width: 100vw;height:100vh;">
-	<div id="postcard-image-container">
-		<div class="container">
-			<div class="row">
-				<div class="four columns offset-by-one-column" style="margin-top: 20px;background: #fff; min-width: 300px;">
-					<div class="container">
-						<p ng-model="view.name">{{ postcard.name }}</p>
-					</div>
-				</div>
-			</div>
+<div id="img-pops"></div>
 
+<div ng-hide="unlocked">
+	<div class="vh-middle">
+		<div>
+			<p>{{ postcard.hint }}</p><br />
+			<input type="text" class="u-full-width" placeholder="Answer" ng-model="userAnswer" ng-keyup="unlock()">
 		</div>
 	</div>
-
 </div>
 
+<div class="row" ng-show="unlocked">
+
+	<div id="image-container">
+		<a href="{{ img }}" class="pop"><img class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
+	</div>
+
+	<div id="text-container">
+		<p class="album-piece">
+			{{ msg }}<br />
+			{{ postcard.name }}<br />
+			{{ postcard.location }}<br />
+			{{ postcard.hint }}<br />
+			{{ postcard.key }}<br />
+			{{ postcard.private }}<br />
+		</p>
+	</div>
+	
+</div>
+
+<!--<div id="view-image-container" style="background-image: url({{ postcard.image }});"></div>-->
+
+<!--<div id="postcard-text-container">
+	<div class="row">
+		<div class="four columns">
+			<div style="background: rgba(255, 255, 255, 0.15); min-width: 300px; height: 90vh; padding: 5vh 20px; overflow: scroll;">
+				<p ng-model="view.name">{{ postcard.greeting }}</p>
+				<p ng-model="view.name">/ {{ postcard.name }}, {{ postcard.location }}</p>
+			</div>
+		</div>
+	</div>
+</div>-->
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
 <script src="controllers/controller.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

@@ -2,11 +2,14 @@ var postcardApp = angular.module('postcardApp', []);
 postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	console.log("Hello from appCtrl");
 
+	// Sortoptions to filter
+	$scope.sortOption = 'date'; // Sort by date by default
+
 	var refresh = function() {
 		$http.get('/postcards').success(function(response) {
 			console.log("refresh() got the req data");
 			$scope.postcards = response;
-			$scope.postcard = "";
+			//*$scope.postcard = "";
 		});
 	};
 
@@ -14,10 +17,16 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
 	$scope.addPostcard = function() {
 		console.log($scope.postcard);
+		$scope.postcard.date = new Date();
+		$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
 		$http.post('/postcards', $scope.postcard).success(function(response) {
 			console.log(response._id);
 			$scope.shareUrl = "http://localhost:3000/mailbox/?id=" + response._id;
-			refresh();
+			
+			var element = document.getElementById("toggle-container");
+			element.innerHTML = '<p>Share this link with your loved ones!</p><p><a href="' + $scope.shareUrl + '">' + $scope.shareUrl + '</a></p>';
+			//element.classList.add("fixed-fullscreen");
+			//refresh();
 		});
 	};
 

@@ -28,6 +28,86 @@
 
 /* Authors Custom
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* Bg-slideshow */
+#bg-slideshow {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+
+  background-image: url(../img/slides/bg1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+/* Main app */
+.app-window {
+  position: relative;
+  min-height: 100vh;
+}
+
+#main-app-container {
+  position: absolute;
+  width: 320px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+  background: rgba(255,255,255,0.9);
+  padding: 17px 17px 0 17px;
+  border-radius: 10px;
+}
+
+@media (max-width: 400px) {
+  #main-app-container {
+    width: 80%;
+    margin: 10px auto 0;
+
+  }
+}
+
+/* Search form */
+
+#search-form-container {
+  background-color: #fff;
+}
+
+#search-form {
+  margin: 70px 15px;
+}
+
+/* Start */
+#text-container-start {
+  position: relative;
+  float: right;
+  width: 50%;
+  overflow: scroll;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#text-container-start > div {
+  width: 80%;
+  margin: 50px auto 80px;
+}
+
+#image-container-start {
+  position: relative;
+  float: right;
+  width: 50%;
+  height: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#image-container-start > div {
+  margin: 50px auto;
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 #bg-container {
   background-image: url(http://fredriklarsson.org/lanka/img/167.jpg);
   min-height: 100vh;
@@ -45,13 +125,26 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  z-index: -1;
+}
+
+#about-btn {
+  position: absolute;
+  top: 7px;
+  right: 13px;
+  color: #f033a4;
 }
 
 #form-container {
   position: relative;
   margin: 40px 0 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.77);
   min-width: 300px;
+  border-radius: 12px;
+
+  -webkit-box-shadow: 0px 0px 21px -2px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 0px 21px -2px rgba(0,0,0,0.25);
+  box-shadow: 0px 0px 21px -2px rgba(0,0,0,0.25);
 }
 
 #form-container form {
@@ -59,27 +152,166 @@
 }
 
 #form-container > div {
-  padding: 50px 20px;
+  padding: 50px 20px 10px;
+}
+
+#send-postcard {
+  font-size: 14px;
 }
 
 #send-icon {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  position: relative;
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: cadetblue;
+  background: #000;
 }
 
 #send-icon i {
-  font-size: 40px;
+  font-size: 25px;
   color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translateX(-50%)translateY(-50%);
 }
+
+.fixed-fullscreen {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+}
+
+#view-image-container {
+  position: fixed;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  }
+
+#text-container {
+  position: relative;
+  float: right;
+  width: 50%;
+  height: 100vh;
+  overflow: scroll;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+#image-container {
+  position: relative;
+  float: right;
+  width: 50%;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#image-container > div {
+  background-size: 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+  @media (max-width: 700px) {
+    #text-container, #image-container { width: 100%; height: 50vh; }
+  }
+
+.album-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+  max-width: 80%;
+}
+
+.vh-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%)translateY(-50%);
+}
+
+/* Popup images */
+.imgPopUp {
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 999;
+
+  background: -moz-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.8) 1%, rgba(0,0,0,1) 100%); 
+  background: -webkit-radial-gradient(center, ellipse cover,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.8) 1%,rgba(0,0,0,1) 100%);
+  background: radial-gradient(ellipse at center,  rgba(0,0,0,0.8) 0%,rgba(0,0,0,0.8) 1%,rgba(0,0,0,1) 100%); 
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cc000000', endColorstr='#000000',GradientType=1 );
+}
+
+.imgPopUp > div {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.imgPopUp img {
+  width: 90%;
+  max-width: 800px;
+  max-height: 800px;
+}
+
+/* Thumbs for public postcards */
+.publicThumb {
+  position: relative;
+  float: left;
+  width: 25%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+  @media (max-width: 650px) {
+    .publicThumb { width: 50%; }
+  }
+
+.color-filter {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(240, 51, 164, 0.35);
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+
+.publicThumb:hover .color-filter {
+  opacity: 1;
+}
+
+.publicThumb h2 {
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.clearfix:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+/* Show hide animation */
 
 
 /* Grid
@@ -180,7 +412,7 @@ body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
   line-height: 1.6;
   font-weight: 400;
-  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #222; }
 
 
@@ -214,9 +446,9 @@ p {
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1EAEDB; }
+  color: #d02c8e; }
 a:hover {
-  color: #0FA0CE; }
+  color: #d02c8e; }
 
 
 /* Buttons
@@ -262,8 +494,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
   color: #FFF;
-  background-color: #33C3F0;
-  border-color: #33C3F0; }
+  background-color: #f033a4;
+  border-color: #f033a4; }
 .button.button-primary:hover,
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
@@ -275,12 +507,14 @@ input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
   color: #FFF;
-  background-color: #1EAEDB;
-  border-color: #1EAEDB; }
+  background-color: #d02c8e;
+  border-color: #d02c8e; }
 
 
 /* Forms
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+textarea, input { font-family: 'Courier New'; }
+textarea { resize: none; }
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -293,8 +527,10 @@ select {
   height: 38px;
   padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
   background-color: #fff;
-  border: 1px solid #D1D1D1;
-  border-radius: 4px;
+  border-bottom: 1px solid #000;
+  border-top: #fff;
+  border-left: #fff;
+  border-right: #fff;
   box-shadow: none;
   box-sizing: border-box; }
 /* Removes awkward default styles on some inputs for iOS */
@@ -322,7 +558,10 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border: 1px solid #33C3F0;
+  border-bottom: 1px solid #f033a4;
+  border-top: #fff;
+  border-left: #fff;
+  border-right: #fff;
   outline: 0; }
 label,
 legend {
