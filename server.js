@@ -5,7 +5,7 @@ var db 			= mongojs('mongodb://rucl:Speci4L!@ds163667.mlab.com:63667/rucldb', ['
 var bodyParser 	= require('body-parser');
 var path    	= require("path");
 
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/"));
 app.use(bodyParser.json());
 
 
