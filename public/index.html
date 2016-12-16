@@ -26,10 +26,13 @@
 
 <!-- Bg-slideshow -->
 <div id="bg-slideshow"></div>
+<!-- Error-messages -->
+<div id="err-msg"></div>
 
 <!-- Main app -->
 <div class="row app-window" style="background-image: url({{ postcard.image }});">
 
+	<img id="logo" src="img/stamp_logo.png" alt="Logo" />
 	<p id="about-btn">About</p>
 
 	<!-- Input field -->
@@ -37,57 +40,28 @@
 	<div id="main-app-container">
 		<div style="position: relative;">
 			<div id="toggle-container">
-				<form>
-					<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
-					<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;"></textarea>
-					<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name">
-					<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location">
+				<form name="postcardForm" ng-keyup="formCheck()" ng-click="formCheck()">
+					<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image" required>
+					<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;" required></textarea>
+					<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name" required>
+					<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location" required>
 					<label>
-						<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false">
+						<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false" ng-click="hideShowHintfield()">
 						<span class="label-body">Private postcard</span>
 					</label>
-					<div id="hintfield" class="row" ng-show="postcard.private">
-						<input type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
-						<input type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
+					<div id="hintfield">
+						<input name="postcardHint" type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
+						<input name="postcardKey" type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
 					</div>
-					<button id="send-postcard" class="button button-primary u-full-width" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Postcard</button>
+					<div style="height: 38px; overflow: hidden;">
+						<button id="send-postcard" class="button button-primary u-full-width" ng-init="hideButton = true" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Postcard</button>
+					</div>
 				</form>
 			</div>
 		</div>
 	</div>
-	<!-- **************************************************************************************** -->
-	<!--<div id="image-container-start">
-		<div style="background-image: url({{ postcard.image }});"></div>
-	</div>
+</div><!-- !end.Main app -->
 
-	<div id="text-container-start">
-		<div>
-			<div style="position: relative;">
-				<div id="toggle-container">
-					<form>
-						<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image">
-
-						<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;"></textarea>
-						<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name">
-						<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location">
-						<label>
-							<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false">
-							<span class="label-body">Private postcard</span>
-						</label>
-						<div id="hintfield" class="row" ng-show="postcard.private">
-							<input type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
-							<input type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
-						</div>
-						<button id="send-postcard" class="button button-primary u-full-width" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Post</button>
-						<div id="send-icon"><i class="fa fa-paper-plane" aria-hidden="true" ng-click="addPostcard()"></i></div>
-					</form>
-					<h1>{{ postcard.key }}</h1>
-				</div>
-			</div>
-		</div>
-	</div>-->
-</div>
-<!-- Show public postcards -->
 <!-- Form to search list -->
 <div id="search-form-container">
 	<div class="row">
@@ -98,6 +72,8 @@
 		</div>
 	</div>
 </div>
+
+<!-- Show public postcards -->
 <div class="row" style="background-color: #fff;">
 	<div ng-repeat="publicPostcard in postcards | orderBy:sortOption | filter:searchPostcards | limitTo:24">
 		<a href="/mailbox/?id={{ publicPostcard._id}}">

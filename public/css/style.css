@@ -44,25 +44,67 @@
 .app-window {
   position: relative;
   min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #main-app-container {
   position: absolute;
-  width: 320px;
+  width: 300px;
   top: 50%;
   left: 50%;
   transform: translateX(-50%)translateY(-50%);
-  background: rgba(255,255,255,0.9);
-  padding: 17px 17px 0 17px;
+  background: rgba(255,255,255,1);
+  padding: 17px 15px 0 15px;
   border-radius: 10px;
 }
 
 @media (max-width: 400px) {
   #main-app-container {
     width: 80%;
-    margin: 10px auto 0;
-
+    margin: 50px auto 0;
+    position: initial;
+    top: initial;
+    left: initial;
+    transform: translateX(0%)translateY(0%);
   }
+
+  .app-window {
+    padding-top: 10px;
+    min-height: auto;
+  }
+}
+
+@media (max-height: 670px) {
+  #main-app-container {
+    top: 7px;
+    transform: translateX(-50%)translateY(0%);
+  }
+}
+
+div#err-msg > div {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%)translateY(-50%);
+    width: 270px;
+    height: 270px;
+    border-radius: 50%;
+    background-color: rgba(240,51,164,0.75);
+}
+
+div#err-msg p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%)translateY(-50%);
+    max-width: 190px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1rem;
 }
 
 /* Search form */
@@ -128,6 +170,15 @@
   z-index: -1;
 }
 
+#logo {
+  position: absolute;
+  top: 7px;
+  left: 13px;
+  color: #f033a4;
+  width: 15px;
+  z-index: 10;
+}
+
 #about-btn {
   position: absolute;
   top: 7px;
@@ -156,7 +207,9 @@
 }
 
 #send-postcard {
+  height: 38px;
   font-size: 14px;
+  opacity: 0;
 }
 
 #send-icon {
@@ -311,8 +364,10 @@
    clear: both;
 }
 
-/* Show hide animation */
-
+#hintfield {
+  overflow: hidden;
+  height: 0px;
+}
 
 /* Grid
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -562,7 +617,8 @@ select:focus {
   border-top: #fff;
   border-left: #fff;
   border-right: #fff;
-  outline: 0; }
+  outline: 0;
+  background: rgba(240,51,164,0.05); }
 label,
 legend {
   display: block;

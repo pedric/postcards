@@ -71,9 +71,9 @@ app.put('/postcards/:id', function(req, res) {
 });
 
 
-
-app.listen(3000);
-console.log("Server listens on port 3000");
+var port = Number(process.env.port || 3000);
+app.listen(port);
+console.log("Server listens on port " + port);
 
 
 

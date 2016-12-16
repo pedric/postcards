@@ -42,3 +42,13 @@ function thumbsHeight() {
 
 window.addEventListener('load', thumbsHeight, false);
 window.addEventListener('resize', thumbsHeight, false);
+
+
+function addHeightToMainWindow() {
+	if($(".app-window").height() < $("#main-app-container").height() + 160) {
+		$(".app-window").css("height", $("#main-app-container").height() + 160);
+	}
+}
+
+window.addEventListener('load', addHeightToMainWindow, false);
+window.addEventListener('resize', addHeightToMainWindow, false);

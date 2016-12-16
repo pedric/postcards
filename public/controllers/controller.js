@@ -15,19 +15,59 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
 	refresh();
 
+	// Checkbox and require fields
+	$scope.formCheck = function() {
+		if ($scope.postcardForm.$valid && !$scope.postcard.private) {
+			$scope.hideButton = false;
+		} else if ($scope.postcardForm.$valid && $scope.postcard.private && $scope.postcard.hint.length > 0 && $scope.postcard.key.length > 0) {
+			$scope.hideButton = false;
+		} else {
+			$scope.hideButton = true;
+		}
+
+		if (!$scope.hideButton) {
+			$("#send-postcard").animate({ display: "block",opacity: 1 }, 200 );
+		} else {
+			$("#send-postcard").animate({ opacity: 0, display: "none" }, 200 );
+		}
+	}
+
 	$scope.addPostcard = function() {
-		console.log($scope.postcard);
-		$scope.postcard.date = new Date();
-		$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
-		$http.post('/postcards', $scope.postcard).success(function(response) {
-			console.log(response._id);
-			$scope.shareUrl = "http://localhost:3000/mailbox/?id=" + response._id;
+		
+		if ($scope.postcardForm.$valid) {
 			
-			var element = document.getElementById("toggle-container");
-			element.innerHTML = '<p>Share this link with your loved ones!</p><p><a href="' + $scope.shareUrl + '">' + $scope.shareUrl + '</a></p>';
-			//element.classList.add("fixed-fullscreen");
-			//refresh();
-		});
+			if($scope.postcard.private && $scope.postcard.hint.length > 0 && $scope.postcard.key.length > 0 || !$scope.postcard.private) {
+				
+				$scope.postcard.date = new Date();
+				$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
+				$http.post('/postcards', $scope.postcard).success(function(response) {
+					
+					$scope.shareUrl = "http://localhost:3000/mailbox/?id=" + response._id;
+					
+					var element = document.getElementById("toggle-container");
+					element.innerHTML = '<p>Share this link with your loved ones!</p><p><a href="' + $scope.shareUrl + '">' + $scope.shareUrl + '</a></p>';
+					
+				});
+
+			} else {
+				var element = document.getElementById("err-msg");
+				element.innerHTML = "<div><p>Private postcards requires a question and an answer..</p></div>";	
+			}
+
+		} else {
+			var element = document.getElementById("err-msg");
+			element.innerHTML = "<div><p>Oops, the postcard is not complete..</p></div>";
+		}
+	};
+
+	$scope.hideShowHintfield = function($element) {
+
+		if ($scope.postcard.private) {
+			$("#hintfield").animate({ height: "106px" }, 200);
+		} else {
+			$("#hintfield").animate({ height: "0px" }, 200);
+		}
+		
 	};
 
 	$scope.remove = function(id) {
