@@ -8,12 +8,6 @@ var path    	= require("path");
 app.use(express.static(path.join(__dirname + "/public")));
 app.use(bodyParser.json());
 
-app.get('/rill/:id', function(req, res) {
-	
-	var userid = req.params.id;
-	res.sendFile(path.join(__dirname + '/public/mailbox.html', { user: userid }));
-});
-
 /* GET all documents from collection postcards */
 app.get('/postcards', function(req, res) {
 
@@ -72,5 +66,5 @@ var port = Number(process.env.port || 3000);
 app.listen(port);
 console.log("Server listens on port " + port);
 
-
+module.exports = app;
 
