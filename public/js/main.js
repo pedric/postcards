@@ -36,19 +36,38 @@ function thumbsHeight() {
 	var h = $("#text-container-start").height();
 	$("#image-container-start").css("height", h);
 
-	var w = $(".publicThumb").width();
-	$(".publicThumb").css("height", w);
+	var w = $(window).width();
+
+	if (w < 650) { w = w/2; } else { w = w/4; }
+	$(".publicThumb").css("height", w + "px");
 }
 
-window.addEventListener('load', thumbsHeight, false);
+thumbsHeight();
+
 window.addEventListener('resize', thumbsHeight, false);
 
 
-function addHeightToMainWindow() {
-	if($(".app-window").height() < $("#main-app-container").height() + 160) {
-		$(".app-window").css("height", $("#main-app-container").height() + 160);
+function toggleAbout() {
+
+	var w = $("#about-container").width();
+
+	if ($("#about-container").css("right") == "0px") {
+		$("#about-container").animate({ "right": w + "px" });
+		$("#about-btn").css( "color", "#ffffff" );
+	} else {
+		$("#about-container").animate({ "right": "0px" }, function(){ $("#about-btn").css( "color", "#f14ab6" ); });
+		
 	}
 }
 
-window.addEventListener('load', addHeightToMainWindow, false);
-window.addEventListener('resize', addHeightToMainWindow, false);
+
+function closeSharelink() {
+
+	$("#share-link").remove();
+}
+
+
+function hideImg() {
+	$("#image-container").css("opacity", 0);
+}
+

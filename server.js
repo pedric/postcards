@@ -34,6 +34,7 @@ app.get('/postcards/:id', function(req, res) {
 	var id = req.params.id;
 
 	db.postcards.findOne({ _id: mongojs.ObjectId(id) }, function(err, doc) {
+
 		res.json(doc);
 	});
 });

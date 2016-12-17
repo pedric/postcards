@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="viewApp">
+<html>
 <head>
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -22,60 +22,131 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="img/favicon.png">
 </head>
-<body ng-controller="viewCtrl">
+<body>
 
-<img id="logo" src="../img/stamp_logo.png" alt="Logo" />
-<p id="about-btn">About</p>
+<div ng-app="viewApp" ng-controller="viewCtrl">
 
-<div id="img-pops"></div>
+	<img id="logo" src="../img/stamp_logo.png" alt="Logo" />
+	<p id="about-btn">About</p>
 
-<div ng-hide="unlocked">
-	<div class="vh-middle">
-		<div>
-			<p>{{ postcard.hint }}</p><br />
-			<input type="text" class="u-full-width" placeholder="Answer" ng-model="userAnswer" ng-keyup="unlock()">
-		</div>
-	</div>
-</div>
+	<div id="img-pops"></div>
 
-<div class="row" ng-show="unlocked">
-
-	<div id="image-container">
-		<a href="{{ img }}" class="pop"><img class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
-	</div>
-
-	<div id="text-container">
-		<p class="album-piece">
-			{{ msg }}<br />
-			{{ postcard.name }}<br />
-			{{ postcard.location }}<br />
-			{{ postcard.hint }}<br />
-			{{ postcard.key }}<br />
-			{{ postcard.private }}<br />
-		</p>
-	</div>
-	
-</div>
-
-<!--<div id="view-image-container" style="background-image: url({{ postcard.image }});"></div>-->
-
-<!--<div id="postcard-text-container">
-	<div class="row">
-		<div class="four columns">
-			<div style="background: rgba(255, 255, 255, 0.15); min-width: 300px; height: 90vh; padding: 5vh 20px; overflow: scroll;">
-				<p ng-model="view.name">{{ postcard.greeting }}</p>
-				<p ng-model="view.name">/ {{ postcard.name }}, {{ postcard.location }}</p>
+	<div ng-hide="unlocked">
+		<div class="vh-middle">
+			<div>
+				<p>{{ postcard.hint }}</p><br />
+				<input type="text" class="u-full-width" placeholder="Answer" ng-model="userAnswer" ng-keyup="unlock()">
 			</div>
 		</div>
 	</div>
-</div>-->
+
+	<div class="row" ng-show="unlocked">
+
+		<div id="image-container">
+			<a href="{{ img }}" class="pop"><img class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
+		</div>
+
+		<div id="text-container">
+			<p class="album-piece">
+				{{ msg }}<br />
+				{{ postcard.name }}<br />
+				{{ postcard.location }}<br />
+				{{ postcard.hint }}<br />
+				{{ postcard.key }}<br />
+				{{ postcard.private }}<br />
+			</p>
+		</div>
+		
+	</div>
+
+	<!--<div id="view-image-container" style="background-image: url({{ postcard.image }});"></div>-->
+
+	<!--<div id="postcard-text-container">
+		<div class="row">
+			<div class="four columns">
+				<div style="background: rgba(255, 255, 255, 0.15); min-width: 300px; height: 90vh; padding: 5vh 20px; overflow: scroll;">
+					<p ng-model="view.name">{{ postcard.greeting }}</p>
+					<p ng-model="view.name">/ {{ postcard.name }}, {{ postcard.location }}</p>
+				</div>
+			</div>
+		</div>
+	</div>-->
+</div>
+
+<!-- Send app -->
+<div ng-app="postcardApp" ng-controller="appCtrl">
+	
+	<!-- Bg-slideshow -->
+	<div id="bg-slideshow"></div>
+	<!-- Error-messages -->
+	<div id="err-msg"></div>
+
+	<!-- Main app -->
+	<div class="row app-window" style="background-image: url({{ postcard.image }});">
+
+		<img id="logo" src="img/stamp_logo.png" alt="Logo" />
+		<p id="about-btn">About</p>
+
+		<!-- Input field -->
+
+		<div id="main-app-container">
+			<div style="position: relative;">
+				<div id="toggle-container">
+					<form name="postcardForm" ng-keyup="formCheck()" ng-click="formCheck()">
+						<input type="text" class="u-full-width" placeholder="Image-url" ng-model="postcard.image" required>
+						<textarea class="u-full-width" placeholder="Your greeting ..." ng-model="postcard.greeting" style="height: 210px;" required></textarea>
+						<input type="text" class="u-full-width" placeholder="Your name" ng-model="postcard.name" required>
+						<input type="text" class="u-full-width" placeholder="Your location" ng-model="postcard.location" required>
+						<label>
+							<input type="checkbox" ng-model="postcard.private" ng-init="postcard.private = false" ng-click="hideShowHintfield()">
+							<span class="label-body">Private postcard</span>
+						</label>
+						<div id="hintfield">
+							<input name="postcardHint" type="text" class="u-full-width" placeholder="Hint/Question" ng-model="postcard.hint" ng-init="postcard.hint = ''">
+							<input name="postcardKey" type="text" class="u-full-width" placeholder="Answer" ng-model="postcard.key" ng-init="postcard.key = ''">
+						</div>
+						<div id="send-button-wrapper">
+							<button id="send-postcard" class="button button-primary u-full-width" ng-init="hideButton = true" ng-click="addPostcard()"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send Postcard</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div><!-- !end.Main app -->
+
+	<!-- Form to search list -->
+	<div id="search-form-container">
+		<div class="row">
+			<div class="eight columns offset-by-two columns">
+				<form id="search-form">
+					<input type="text" style="width: 100%;margin: 0;" ng-model="searchPostcards" ng-keyup="searchPostcards" placeholder="Search postcards...">
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- Show public postcards -->
+	<div class="row" style="background-color: #fff;">
+		<div ng-repeat="publicPostcard in postcards | orderBy:sortOption | filter:searchPostcards | limitTo:24">
+			<a href="/mailbox/?id={{ publicPostcard._id}}">
+				<div class="publicThumb" style="height: 200px; background-image: url({{ publicPostcard.image }});">
+					<div class="color-filter"></div>
+					<div class="vh-middle">
+						<h2>{{ publicPostcard.name }}<br />in<br />{{ publicPostcard.location }}</h2>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	
+</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
-<script src="controllers/controller.js"></script>
+<script src="../controllers/controller.js"></script>
 <script src="../js/main.js"></script>
 </body>
 </html>

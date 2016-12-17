@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Dev postcard app</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="img/favicon.png">
+</head>
+<body>
+
+<div ng-app="viewApp" ng-controller="viewCtrl">
+
+	<a href="index.html">
+		<!--<img id="logo" src="img/stamp_logo.png" alt="Logo" />-->
+		<h1 id="pink-post">Pink<span>Postcards</span></h1>
+	</a>
+
+	<div id="img-pops"></div>
+
+	<div id="confirm"></div>
+
+	<div ng-hide="unlocked">
+		<div class="vh-middle">
+			<div style="color: #fff; text-align: center;">
+				<p><strong>This postcard is locked.<br />Can you answer?</strong></p>
+				<p>{{ postcard.hint }}</p><br />
+				<input type="text" class="u-full-width" placeholder="Answer" ng-model="userAnswer" ng-keyup="unlock()">
+			</div>
+		</div>
+	</div>
+
+	<div class="row" ng-init="unlocked = false" ng-show="unlocked">
+
+		<div id="image-container">
+			<a href="{{ img }}" class="pop"><img class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" onerror="hideImg()" /></a>
+		</div>
+
+		<div id="text-container">
+			<p class="album-piece">
+				{{ msg }}<br /><br />
+				<span class="from-signature">{{ postcard.name }}, {{ postcard.location }}, {{ postcard.date | date: "y/MM/d"}}</span>
+			</p>
+		</div>
+		
+	</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="controllers/viewApp.js"></script>
+<script src="controllers/postcardApp.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

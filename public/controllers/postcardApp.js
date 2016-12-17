@@ -5,15 +5,18 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	// Sortoptions to filter
 	$scope.sortOption = 'date'; // Sort by date by default
 
-	var refresh = function() {
+	$scope.refresh = function() {
 		$http.get('/postcards').success(function(response) {
-			console.log("refresh() got the req data");
+
 			$scope.postcards = response;
-			//*$scope.postcard = "";
 		});
 	};
 
-	refresh();
+	$scope.refresh();
+
+	$scope.unset = function() {
+		$scope.postcard = "";
+	};
 
 	// Checkbox and require fields
 	$scope.formCheck = function() {
@@ -46,19 +49,41 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 					
 					$scope.shareUrl = "http://localhost:3000/mailbox.html?id=" + response._id;
 					
-					var element = document.getElementById("toggle-container");
-					element.innerHTML = '<p>Share this link with your loved ones!</p><p><a href="' + $scope.shareUrl + '">' + $scope.shareUrl + '</a></p>';
+					$("#main-app-container").animate({ opacity: 0 }, 100, function() {
+
+						var element = '<div id="share-link"><p>Share this link with your loved ones!</p><p><a href="' + 
+						$scope.shareUrl + '">' + $scope.shareUrl + 
+						'</a></p><p onclick="closeSharelink()">Send more postcards!</p></div>';
+						$("#toggle-container").prepend(element);
+
+						$("#main-app-container").animate({ opacity: 1 }, 100);
+					});
+
+					$scope.refresh();
+					$scope.unset();
 					
 				});
 
 			} else {
-				var element = document.getElementById("err-msg");
-				element.innerHTML = "<div><p>Private postcards requires a question and an answer..</p></div>";	
+
+				$("#err-msg").html("<div><p>Private postcards require a question and answer.</p></div>");
+				$("#err-msg div").animate({ opacity: 1 }, 200);
+					setTimeout(function() { 
+					$("#err-msg div").animate({ opacity: 0 }, 750, function() {
+						$("#err-msg").html("");
+					});
+				}, 1500);
 			}
 
 		} else {
-			var element = document.getElementById("err-msg");
-			element.innerHTML = "<div><p>Oops, the postcard is not complete..</p></div>";
+
+			$("#err-msg").html("<div><p>This postcard is not complete.</p></div>");
+			$("#err-msg div").animate({ opacity: 1 }, 200);
+				setTimeout(function() { 
+				$("#err-msg div").animate({ opacity: 0 }, 750, function() {
+					$("#err-msg").html("");
+				});
+			}, 1500);
 		}
 	};
 
@@ -73,6 +98,18 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		}
 		
 	};
+
+	$scope.addSearchResults = function() {
+
+		if ($scope.searchResults < Object.keys($scope.postcards).length) {
+			$scope.searchResults += 24;
+			if ($scope.searchResults > Object.keys($scope.postcards).length) {
+				$scope.showmore = "That's all :)";	
+			}
+		} else {
+			$scope.showmore = "That's all :)";
+		}
+	}
 
 	$scope.remove = function(id) {
 		console.log(id);
@@ -98,65 +135,6 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
 	$scope.deselect = function() {
 		$scope.contact = "";
-	};
-
-}]);
-
-// View site
-
-var viewApp = angular.module('viewApp', []);
-viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
-	console.log("Hello from viewCtrl");
-
-	$scope.unlocked = true;
-
-	/* Get id from url */
-	function getId(param){
-	   if(param = (new RegExp('[?&]'+encodeURIComponent(param)+'=([^&]*)')).exec(location.search))
-	      return decodeURIComponent(param[1]);
-	}
-		
-	var id = getId('id');
-
-	var publicOrPrivate = function() {
-
-		if(!$scope.postcard.private) {
-			$scope.unlocked = true;
-			$scope.msg = $scope.postcard.greeting;
-			$scope.img = $scope.postcard.image;
-		} else {
-			$scope.unlocked = false;
-		}
-	};
-
-	var setView = function(id) {
-		$http.get('/postcards/' + id).success(function(response) {
-			console.log(response);
-			$scope.postcard = response;
-
-			publicOrPrivate();
-		});
-	};
-
-	setView(id);
-
-	$scope.unlock = function() {
-
-		var escapedUserAnswer = $scope.userAnswer.toLowerCase().replace(/\s+/g, "");
-
-		if(escapedUserAnswer === $scope.postcard.key) {
-			$scope.unlocked = true;
-			$scope.msg = $scope.postcard.greeting;
-			$scope.img = $scope.postcard.image;
-		}
-	};
-
-	$scope.remove = function(id) {
-		console.log(id);
-
-		$http.delete('/postcards/' + id).success(function(response) {
-			refresh();
-		});
 	};
 
 }]);
