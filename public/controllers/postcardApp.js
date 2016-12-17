@@ -1,6 +1,5 @@
 var postcardApp = angular.module('postcardApp', []);
 postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
-	console.log("Hello from appCtrl");
 
 	// Sortoptions to filter
 	$scope.sortOption = 'date'; // Sort by date by default

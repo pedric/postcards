@@ -1,11 +1,12 @@
 var express		= require("express");
-var app 		= express();
 var mongojs 	= require('mongojs');
 var db 			= mongojs('mongodb://rucl:Speci4L!@ds163667.mlab.com:63667/rucldb', ['postcards']);
 var bodyParser 	= require('body-parser');
 var path    	= require("path");
 
-app.use(express.static(path.join(__dirname + "/public")));
+var app 		= express();
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 /* GET all documents from collection postcards */
@@ -23,7 +24,7 @@ app.get('/postcards/:id', function(req, res) {
 	var id = req.params.id;
 
 	db.postcards.findOne({ _id: mongojs.ObjectId(id) }, function(err, doc) {
-		if (err) { throw 'Nothing found'; }
+
 		res.json(doc);
 	});
 });
