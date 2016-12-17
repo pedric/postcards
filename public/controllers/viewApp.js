@@ -1,6 +1,5 @@
 var viewApp = angular.module('viewApp', []);
 viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
-	console.log("Hello from viewCtrl");
 
 	$scope.unlocked = true;
 
@@ -10,32 +9,35 @@ viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 	      return decodeURIComponent(param[1]);
 	}
 
+	var id = getId('id');
+
+	/*if (id == null) { window.location.replace("index.html"); }*/
+
 	var publicOrPrivate = function() {
 
 		if(!$scope.postcard.private) {
-			$scope.unlocked = true;
+			$scope.unlocked = false;
 			$scope.msg = $scope.postcard.greeting;
 			$scope.img = $scope.postcard.image;
-			$("#confirm").animate({ "opacity": 0 }, 300 );
+			$("#confirm").css( "opacity", 0 );
 		} else {
-			$scope.unlocked = false;
+			$scope.unlocked = true;
 		}
 	};
 
 	var setView = function(id) {
+
 		$http.get('/postcards/' + id).success(function(response) {
 
 			$scope.postcard = response;
-
 			publicOrPrivate();
 		});
 	};
 
-	var id = getId('id');
 	setView(id);
 
 	var showContent = function() {
-		$scope.unlocked = true;
+		$scope.unlocked = false;
 		$scope.msg = $scope.postcard.greeting;
 		$scope.img = $scope.postcard.image;
 	};
@@ -46,7 +48,7 @@ viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 
 		if(escapedUserAnswer === $scope.postcard.key) {
 			$("#confirm").animate({ "opacity": 0 }, 300 );
-			$scope.unlocked = true;
+			$scope.unlocked = false;
 			$scope.msg = $scope.postcard.greeting;
 			$scope.img = $scope.postcard.image;
 		}

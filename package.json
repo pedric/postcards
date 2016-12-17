@@ -1,7 +1,7 @@
 {
-  "name": "contactlistapp",
+  "name": "Pink Postcard",
   "version": "1.0.0",
-  "description": "",
+  "description": "Postcard app developed as projekt at university",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.10.2",
@@ -11,16 +11,16 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./public/"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/pedric/postcards.git"
   },
-  "author": "",
+  "author": "Fredrik Larsson",
   "license": "ISC",
   "bugs": {
     "url": ""
   },
-  "homepage": ""
+  "homepage": "https://larsson-postcardapp.herokuapp.com/"
 }

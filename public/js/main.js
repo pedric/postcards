@@ -17,9 +17,11 @@ $(function(){
 	});
 
 	$(".imgPopUp").on("click", function(){
-
 		$(".imgPopUp").remove();
+	});
 
+	$("img.album-piece").on('error', function(){
+		$("#image-container").css("opacity", 0);	
 	});
 });
 
@@ -66,8 +68,4 @@ function closeSharelink() {
 	$("#share-link").remove();
 }
 
-
-function hideImg() {
-	$("#image-container").css("opacity", 0);
-}
 

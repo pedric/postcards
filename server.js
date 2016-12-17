@@ -5,19 +5,14 @@ var db 			= mongojs('mongodb://rucl:Speci4L!@ds163667.mlab.com:63667/rucldb', ['
 var bodyParser 	= require('body-parser');
 var path    	= require("path");
 
-app.use(express.static(__dirname + "/public/"));
+app.use(express.static(path.join(__dirname + "/public")));
 app.use(bodyParser.json());
 
-
-/* GET Test */
-/*app.get('/mailbox/:id', function(req, res) {
-
-	var id = req.params.id;
-
-	res.sendFile(path.join(__dirname + '/public/mailbox/index.html'));
-});*/
-
-
+app.get('/rill/:id', function(req, res) {
+	
+	var userid = req.params.id;
+	res.sendFile(path.join(__dirname + '/public/mailbox.html', { user: userid }));
+});
 
 /* GET all documents from collection postcards */
 app.get('/postcards', function(req, res) {
@@ -34,7 +29,7 @@ app.get('/postcards/:id', function(req, res) {
 	var id = req.params.id;
 
 	db.postcards.findOne({ _id: mongojs.ObjectId(id) }, function(err, doc) {
-
+		if (err) { throw 'Nothing found'; }
 		res.json(doc);
 	});
 });
@@ -62,6 +57,7 @@ app.delete('/postcards/:id', function(req, res) {
 
 /* UPDATE */
 app.put('/postcards/:id', function(req, res) {
+
 	var id = req.params.id;
 
 	db.postcards.findAndModify({ query: {_id: mongojs.ObjectId(id)},

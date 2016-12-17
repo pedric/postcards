@@ -58,6 +58,10 @@
 		<p>
 			Connecting your own devices and get a url to share your own images is easy, for example you can upload it to your Google drive (you may be having this thought now: "why bother the mess I share stuff at Facebook morons!"). You may do so, or share at Instagram and why not just email it. Well, our thought is, why not send your greeting together with an image in a more personal way, still digital, but nicely packaged and a little more personal, you share the url the way you want. And you can even lock your postcard by setting a question the visitor hav to answer in order to view the it.
 		</p>
+		<h3>How to send PinkPostcards.</h3>
+		<p>
+			Placeholder ...
+		</p>
 	</div>
 </div>
 
@@ -111,12 +115,11 @@
 
 <!-- Show public postcards -->
 <div class="row" style="background-color: #000;">
-	<div ng-repeat="publicPostcard in postcards | orderBy:sortOption:true | filter:searchPostcards | limitTo:searchResults" ng-hide="publicPostcard.private">
+	<div ng-repeat="publicPostcard in postcards | orderBy:sortOption:true | filter:searchPostcards | limitTo:searchResults">
 		<a href="/mailbox.html?id={{ publicPostcard._id}}">
 			<div class="publicThumb">
-				<div class="image-filter" style="background-image: url({{ publicPostcard.image }});">
-					<div class="color-filter"></div>
-				</div>
+				<div class="image-filter" ng-hide="publicPostcard.private" style="background-image: url({{ publicPostcard.image }});"><div class="color-filter"></div></div>
+				<div class="image-filter" ng-show="publicPostcard.private" style="background-image: url(img/private-placeholder.png);"><div class="color-filter"></div></div>
 				<div class="vh-middle">
 					<h2>{{ publicPostcard.name }}<br />in<br />{{ publicPostcard.location }}</h2>
 				</div>

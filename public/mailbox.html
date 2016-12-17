@@ -35,7 +35,7 @@
 
 	<div id="confirm"></div>
 
-	<div ng-hide="unlocked">
+	<div ng-show="unlocked">
 		<div class="vh-middle">
 			<div style="color: #fff; text-align: center;">
 				<p><strong>This postcard is locked.<br />Can you answer?</strong></p>
@@ -45,10 +45,10 @@
 		</div>
 	</div>
 
-	<div class="row" ng-init="unlocked = false" ng-show="unlocked">
+	<div class="row" ng-init="unlocked = false" ng-hide="unlocked">
 
 		<div id="image-container">
-			<a href="{{ img }}" class="pop"><img class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" onerror="hideImg()" /></a>
+			<a href="{{ img }}" class="pop"><img id="mailbox-img" class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
 		</div>
 
 		<div id="text-container">
