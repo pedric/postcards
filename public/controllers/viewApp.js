@@ -11,7 +11,7 @@ viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 
 	var id = getId('id');
 
-	/*if (id == null) { window.location.replace("index.html"); }*/
+	if (id == null) { window.location.replace("index.html"); }
 
 	var publicOrPrivate = function() {
 
@@ -29,6 +29,10 @@ viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 
 		$http.get('/postcards/' + id).success(function(response) {
 
+			if (!response) {
+				window.location.replace("index.html");
+			}
+
 			$scope.postcard = response;
 			publicOrPrivate();
 		});
@@ -40,6 +44,12 @@ viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 		$scope.unlocked = false;
 		$scope.msg = $scope.postcard.greeting;
 		$scope.img = $scope.postcard.image;
+	};
+
+	$scope.report = function() {
+		$http.put('/postcards/' + $scope.postcard._id).success(function(response){
+			$scope.reported = true;
+		});
 	};
 
 	$scope.unlock = function() {

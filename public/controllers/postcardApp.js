@@ -4,6 +4,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	// Sortoptions to filter
 	$scope.sortOption = 'date'; // Sort by date by default
 
+
 	$scope.refresh = function() {
 		$http.get('/postcards').success(function(response) {
 

@@ -23,6 +23,8 @@ $(function(){
 	$("img.album-piece").on('error', function(){
 		$("#image-container").css("opacity", 0);	
 	});
+
+	$("body").animate({ "opacity": 1 });
 });
 
 function closeImgPopUp() {

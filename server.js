@@ -12,13 +12,6 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
-app.all('/*', function(req, res, next){
-	res.header("Access-Control-Allow-Origin", "*");
-	res.header("Access-Control-Allow-Headers", "X-Requested-With");
-	res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE");
-	next();
-});
-
 /* GET all documents from collection postcards */
 app.get('/postcards', function(req, res) {
 
@@ -66,7 +59,7 @@ app.put('/postcards/:id', function(req, res) {
 	var id = req.params.id;
 
 	db.postcards.findAndModify({ query: {_id: mongojs.ObjectId(id)},
-		update: {$set: { name: req.body.name, email: req.body.email, number: req.body.number }},
+		update: {$set: { reported: true }},
 		new: true }, function(err, doc) {
 			res.json(doc);
 	});
