@@ -1,12 +1,12 @@
 {
-  "name": "PinkPostcard",
+  "name": "pinkpostcard",
   "version": "1.0.0",
-  "description": "Postcard app developed as projekt at university",
+  "description": "Postcard app developed as MEAN-project at university",
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./public/"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.10.2",

@@ -1,14 +1,12 @@
-var express		= require("express");
+var express		= require('express');
 var mongojs 	= require('mongojs');
 var bodyParser 	= require('body-parser');
-var path    	= require("path");
+var path    	= require('path');
 var myDB		= require('./config.js');
-var mongoose	= require('mongoose');
 
 var dbUrl = myDB.dbUrl;
 
-var db 			= mongojs(dbUrl, ['postcards']);
-
+var db = mongojs(dbUrl, ['postcards']);
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -77,4 +75,5 @@ app.put('/postcards/:id', function(req, res) {
 
 var port = Number(process.env.port || 3000);
 app.listen(port);
+console.log('App running on ' + port);
 
