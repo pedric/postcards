@@ -6,7 +6,7 @@ var myDB		= require('./config.js');
 
 var dbUrl = myDB.dbUrl;
 
-var db 			= mongojs(dbUrl, ['postcards']);
+var db 			= mongojs(process.env.MONGODB_URI, ['postcards']);
 var app 		= express();
 
 app.use(express.static(path.join(__dirname, 'public')));

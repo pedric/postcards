@@ -11,7 +11,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		});
 	};
 
-	/*$scope.refresh();*/
+	$scope.refresh();
 
 	$scope.unset = function() {
 		$scope.postcard = "";
