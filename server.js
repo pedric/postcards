@@ -2,8 +2,11 @@ var express		= require("express");
 var mongojs 	= require('mongojs');
 var bodyParser 	= require('body-parser');
 var path    	= require("path");
+var myDB		= require('./config.js');
 
-var db 			= mongojs('mongodb://rucl:Speci4L!@ds163667.mlab.com:63667/rucldb', ['postcards']);
+var dbUrl = myDB.dbUrl;
+
+var db 			= mongojs(dbUrl, ['postcards']);
 var app 		= express();
 
 app.use(express.static(path.join(__dirname, 'public')));
