@@ -5,12 +5,14 @@ var path    	= require('path');
 var myDB		= require('./config.js');
 
 var dbUrl = myDB.dbUrl;
+var altDB = process.env.MONGODB_URI;
 
-var db = mongojs(process.env.MONGODB_URI, ['postcards']);
+var db = mongojs(dbUrl, ['postcards']);
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+
 
 /* GET all documents from collection postcards */
 app.get('/postcards', function(req, res) {

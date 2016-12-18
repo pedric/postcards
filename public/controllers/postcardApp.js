@@ -1,3 +1,7 @@
+/**********************************************************/
+// Author: Fredrik Larsson | epost.larsson@gmail.com
+/**********************************************************/
+
 var postcardApp = angular.module('postcardApp', []);
 postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
@@ -15,7 +19,13 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.refresh();
 
 	$scope.unset = function() {
-		$scope.postcard = "";
+		$scope.postcard.image = "";
+		$scope.postcard.greeting = "";
+		$scope.postcard.name = "";
+		$scope.postcard.location = "";
+		$scope.postcard.private = false;
+		$scope.postcard.hint = "";
+		$scope.postcard.key = "";
 	};
 
 	// Checkbox and require fields
@@ -47,7 +57,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 				$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
 				$http.post('/postcards', $scope.postcard).success(function(response) {
 					
-					$scope.shareUrl = "http://localhost:3000/mailbox.html?id=" + response._id;
+					$scope.shareUrl = "https://larsson-postcardapp.herokuapp.com/mailbox.html?id=" + response._id;
 					
 					$("#main-app-container").animate({ opacity: 0 }, 100, function() {
 

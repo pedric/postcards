@@ -1,7 +1,11 @@
-/* Open img class "pop" blank *********************************************************/
+/**********************************************************/
+// Author: Fredrik Larsson | epost.larsson@gmail.com
+/**********************************************************/
 
+// Trigger functions on document load
 $(function(){
 
+	// Handle images "theatre mode" (class "pop")
 	$(".pop").on("click", function( e ){
 
 		e.preventDefault();
@@ -20,21 +24,25 @@ $(function(){
 		$(".imgPopUp").remove();
 	});
 
+	// Opacity 0 on deprecated image urls
 	$("img.album-piece").on('error', function(){
 		$("#image-container").css("opacity", 0);	
 	});
 
+	// Fade in body on load
 	$("body").animate({ "opacity": 1 });
 });
 
-function closeImgPopUp() {
 
+// Close and remove image pop-up in "theatre-mode"
+function closeImgPopUp() {
 	$(".imgPopUp").animate({ "opacity": 0 }, 250, function(){
 		$(".imgPopUp").remove();
 	});
 }
 
 
+// Set imagethumbs to be square
 function thumbsHeight() {
 
 	var h = $("#text-container-start").height();
@@ -51,6 +59,7 @@ thumbsHeight();
 window.addEventListener('resize', thumbsHeight, false);
 
 
+// Toggle about in to view on click
 function toggleAbout() {
 
 	var w = $("#about-container").width();
@@ -65,8 +74,8 @@ function toggleAbout() {
 }
 
 
+// Remove element which shows the share-url for postcards
 function closeSharelink() {
-
 	$("#share-link").remove();
 }
 

@@ -1,3 +1,7 @@
+/**********************************************************/
+// Author: Fredrik Larsson | epost.larsson@gmail.com
+/**********************************************************/
+
 var viewApp = angular.module('viewApp', []);
 viewApp.controller('viewCtrl', ['$scope', '$http', function($scope, $http) {
 
