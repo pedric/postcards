@@ -3,14 +3,23 @@ var mongojs 	= require('mongojs');
 var bodyParser 	= require('body-parser');
 var path    	= require("path");
 var myDB		= require('./config.js');
+var mongoose	= require('mongoose');
 
 var dbUrl = myDB.dbUrl;
 
-var db 			= mongojs(process.env.MONGODB_URI, ['postcards']);
-var app 		= express();
+var db 			= mongojs(dbUrl, ['postcards']);
+
+var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+
+app.all('/*', function(req, res, next){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+	res.header("Access-Control-Allow-Methods", "GET,PUT,PATCH,POST,DELETE");
+	next();
+});
 
 /* GET all documents from collection postcards */
 app.get('/postcards', function(req, res) {

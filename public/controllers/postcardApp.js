@@ -5,7 +5,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 	$scope.sortOption = 'date'; // Sort by date by default
 
 	$scope.refresh = function() {
-		$http.get('/postcards').success(function(response) {
+		$http.get('https://larsson-postcardapp.herokuapp.com/postcards').success(function(response) {
 
 			$scope.postcards = response;
 		});
@@ -44,7 +44,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 				
 				$scope.postcard.date = new Date();
 				$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
-				$http.post('/postcards', $scope.postcard).success(function(response) {
+				$http.post('https://larsson-postcardapp.herokuapp.com/postcards', $scope.postcard).success(function(response) {
 					
 					$scope.shareUrl = "http://localhost:3000/mailbox.html?id=" + response._id;
 					
