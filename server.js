@@ -66,7 +66,7 @@ app.put('/postcards/:id', function(req, res) {
 });
 
 
-var port = Number(process.env.port || 3000);
+var port = process.env.port || 3000;
 app.listen(port);
 console.log('App running on ' + port);
 
