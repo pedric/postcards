@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>PinkPostcards</title>
   <meta name="description" content="">
   <meta name="author" content="">
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- FONT
+  <!-- Fonts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -27,17 +23,18 @@
 
 <div ng-app="viewApp" ng-controller="viewCtrl">
 
+	<!-- Logo & About button -->
 	<a href="index.html">
 		<!--<img id="logo" src="img/stamp_logo.png" alt="Logo" />-->
 		<h1 id="pink-post">Pink<span>Postcards</span></h1>
 	</a>
-
 	<div id="about-btn" onclick="toggleAbout()"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
-
+	
+	<!-- Container for theatre mode -->
 	<div id="img-pops"></div>
-
 	<div id="confirm"></div>
 
+	<!-- Container hint/answer input -->
 	<div ng-show="unlocked">
 		<div class="vh-middle">
 			<div style="color: #fff; text-align: center;">
@@ -48,7 +45,8 @@
 		</div>
 	</div>
 
-	<!-- About content -->
+	<!-- About content
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 	<div id="about-container">
 		<div id="about-content">
 			<p onclick="toggleAbout()"><i class="fa fa-times" aria-hidden="true" style="font-size: 24px;"></i> Close window</p>
@@ -75,30 +73,28 @@
 		</div>
 	</div>
 
+	<!-- Show postcard / text+image -->
 	<div class="row" ng-init="unlocked = false" ng-hide="unlocked">
-
 		<div id="image-container">
 			<a href="{{ img }}" class="pop"><img id="mailbox-img" class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
 		</div>
-
 		<div id="text-container">
 			<p class="album-piece">
 				{{ msg }}<br /><br />
 				<span class="from-signature">{{ postcard.name }}, {{ postcard.location }}, {{ postcard.date | date: "y/MM/d"}}</span>
 			</p>
 		</div>
-		
 	</div>
 
 </div>
 
+<!-- Angular / jQuery / Controller / Main.js -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="controllers/viewApp.js"></script>
-<script src="controllers/postcardApp.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

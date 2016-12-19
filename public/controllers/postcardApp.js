@@ -2,22 +2,24 @@
 // Author: Fredrik Larsson | epost.larsson@gmail.com
 /**********************************************************/
 
+// Init Angular app 'postcardApp' & controller 'appCtrl'
 var postcardApp = angular.module('postcardApp', []);
 postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 
-	// Sortoptions to filter
-	$scope.sortOption = 'date'; // Sort by date by default
+	// Options to sort 'search' by date as default
+	$scope.sortOption = 'date';
 
-
+	// Get all postcards from db (GET->'/postcards' / RETURNS json)
 	$scope.refresh = function() {
 		$http.get('/postcards').success(function(response) {
-
 			$scope.postcards = response;
 		});
 	};
 
+	// Init
 	$scope.refresh();
 
+	// Unset function for postcard. Called after sent postcard to clear inputs for "Send more" function without page-reload
 	$scope.unset = function() {
 		$scope.postcard.image = "";
 		$scope.postcard.greeting = "";
@@ -28,7 +30,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		$scope.postcard.key = "";
 	};
 
-	// Checkbox and require fields
+	// Triggered on keyup in form, validates checkbox and require fields. If complete->Show "Send postcard"-button
 	$scope.formCheck = function() {
 		if ($scope.postcardForm.$valid && !$scope.postcard.private) {
 			$scope.hideButton = false;
@@ -47,16 +49,20 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		}
 	}
 
+	// Post new postcard from form to server->DB
 	$scope.addPostcard = function() {
 		
+		// Validate required fields (if user hits enter even if button is hidden until valid)
 		if ($scope.postcardForm.$valid) {
 			
 			if($scope.postcard.private && $scope.postcard.hint.length > 0 && $scope.postcard.key.length > 0 || !$scope.postcard.private) {
 				
+				// Set date and escape spaces/lowercase the "key" before posting scope
 				$scope.postcard.date = new Date();
 				$scope.postcard.key = $scope.postcard.key.toLowerCase().replace(/\s+/g, "");
 				$http.post('/postcards', $scope.postcard).success(function(response) {
 					
+					// Create and prepend element with a link to share the postcard
 					$scope.shareUrl = "https://larsson-postcardapp.herokuapp.com/mailbox.html?id=" + response._id;
 					
 					$("#main-app-container").animate({ opacity: 0 }, 100, function() {
@@ -69,11 +75,14 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 						$("#main-app-container").animate({ opacity: 1 }, 100);
 					});
 
+					// Refresh makes new postcard visible on page directly
 					$scope.refresh();
+					// Unset scope for instant clearing of form, user can send more without reloading page
 					$scope.unset();
 					
 				});
 
+			// If form is not valid
 			} else {
 
 				$("#err-msg").html("<div><p>Private postcards require a question and answer.</p></div>");
@@ -97,6 +106,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		}
 	};
 
+	// Animates visibility of inputs required if checkbox is true
 	$scope.hideShowHintfield = function($element) {
 
 		if ($scope.postcard.private) {
@@ -109,6 +119,7 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		
 	};
 
+	// Add 24 to limit if "Show more" i clicked
 	$scope.addSearchResults = function() {
 
 		if ($scope.searchResults < Object.keys($scope.postcards).length) {
@@ -121,6 +132,8 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 		}
 	}
 
+	/* For further development of admin UI */
+	/*
 	$scope.remove = function(id) {
 		console.log(id);
 
@@ -142,9 +155,5 @@ postcardApp.controller('appCtrl', ['$scope', '$http', function($scope, $http) {
 			refresh();
 		});
 	};
-
-	$scope.deselect = function() {
-		$scope.contact = "";
-	};
-
+	*/
 }]);

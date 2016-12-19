@@ -1,12 +1,12 @@
 {
-  "name": "pinkpostcard",
+  "name": "pinkpostcards",
   "version": "1.0.0",
   "description": "Postcard app developed as MEAN-project at university",
   "main": "server.js",
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./public/"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.10.2",
@@ -15,12 +15,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/pedric/postcards.git"
   },
   "author": "Fredrik Larsson",
   "license": "ISC",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/pedric"
   },
-  "homepage": ""
+  "homepage": "https://larsson-postcardapp.herokuapp.com/"
 }

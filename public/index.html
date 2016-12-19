@@ -1,16 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="postcardApp">
 <head>
-  <!-- Basic Page Needs
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
   <title>PinkPostcards</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <!-- Mobile Specific Metas
-  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- FONT
+  <!-- Fonts
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -25,7 +19,8 @@
 </head>
 <body ng-controller="appCtrl">
 
-<!-- Bg-slideshow -->
+<!-- Bg-slideshow
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div id="bg-slideshow">
 	<ul class="bxslider">
 		<li style="background-image: url('img/slides/1.jpg');"><div class="slider-fade-bg"></div></li>
@@ -40,11 +35,15 @@
 		<li style="background-image: url('img/slides/10.jpg');"><div class="slider-fade-bg"></div></li>
 	</ul>
 </div>
-<!-- bg sm devices -->
+
+<!-- Bg sm devices -->
 <div id="bg-sm-devices"></div>
-<!-- Error-messages -->
+
+<!-- Error-messages container -->
 <div id="err-msg"></div>
-<!-- About content -->
+
+<!-- About content
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div id="about-container">
 	<div id="about-content">
 		<p onclick="toggleAbout()"><i class="fa fa-times" aria-hidden="true" style="font-size: 24px;"></i> Close window</p>
@@ -71,18 +70,17 @@
 	</div>
 </div>
 
-<!-- Main app -->
+<!-- Main app window
+–––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <div class="row app-window" style="background-image: url({{ postcard.image }});">
 
+	<!-- Logo & About button -->
 	<a href="index.html">
-		<!--<img id="logo" src="img/stamp_logo.png" alt="Logo" />-->
 		<h1 id="pink-post">Pink<span>Postcards</span></h1>
 	</a>
-
 	<div id="about-btn" onclick="toggleAbout()"><i class="fa fa-question-circle" aria-hidden="true"></i></div>
 
-	<!-- Input field -->
-
+	<!-- Main app -->
 	<div id="main-app-container">
 		<div style="position: relative;">
 			<div id="toggle-container">
@@ -105,10 +103,10 @@
 				</form>
 			</div>
 		</div>
-	</div>
-</div><!-- !end.Main app -->
+	</div><!-- !end.Main app -->
+</div><!-- !end.Main app window -->
 
-<!-- Form to search list -->
+<!-- Search input -->
 <div id="search-form-container">
 	<div class="row">
 		<div class="eight columns offset-by-two columns">
@@ -119,7 +117,7 @@
 	</div>
 </div>
 
-<!-- Show public postcards -->
+<!-- Show public postcards / ngRepeat->postcards -->
 <div class="row" style="background-color: #000;">
 	<div ng-repeat="publicPostcard in postcards | orderBy:sortOption:true | filter:searchPostcards | limitTo:searchResults">
 		<a href="/mailbox.html?id={{ publicPostcard._id}}">
@@ -134,19 +132,31 @@
 	</div>
 </div>
 
+<!-- Click to show more -->
 <div id="show-more-container">
 	<h2 ng-init="searchResults = 24 ; showmore = 'Show more'" ng-click="addSearchResults()">{{ showmore }}</h2>
 </div>
 
+<div style="background-color: rgb(34,34,34);">
+	<div class="container">
+		<div class="row">
+			<div class="twelwe columns" style="color: #fff; margin: 75px auto 50px; text-align: center;">
+				<p>©2017 Fredrik Larsson | <a href="http://www.svartselet.se">svartselet.se</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Angular / jQuery / Controller / bxSlider / Main.js -->
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
 <script src="controllers/postcardApp.js"></script>
-<!-- bxSlider -->
 <script src="/js/jquery.bxslider.min.js"></script>
 <script src="js/main.js"></script>
+<!-- bxSlider -->
 <script>
 	$(function(){
 	  $('.bxslider').bxSlider({
