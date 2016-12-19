@@ -31,7 +31,7 @@
 /* Bg-slideshow */
 #bg-slideshow {
   display: none;
-  position: fixed;
+  position: absolute;
   width: 100vw;
   height: 100vh;
   z-index: -1;
@@ -380,9 +380,9 @@ div#err-msg p {
   font-family: 'Courier New';
   font-size: 1.6rem;
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
-  transform: translateX(-50%)translateY(-50%);
+  transform: translateX(-50%)translateY(-0%);
   max-width: 80%;
   margin-bottom: 0;
 }

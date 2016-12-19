@@ -3,11 +3,8 @@ var express		= require('express');
 var mongojs 	= require('mongojs');
 var bodyParser 	= require('body-parser');
 var path    	= require('path');
-var myDB		= require('./config.js');
 
-// Development DB
-var devDB = myDB.dbUrl;
-// Dist DB
+// mLab DB
 var distDB = process.env.MONGODB_URI;
 
 // Set connection to DB
