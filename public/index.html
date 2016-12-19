@@ -118,7 +118,7 @@
 </div>
 
 <!-- Show public postcards / ngRepeat->postcards -->
-<div class="row" style="background-color: #000;">
+<div class="row" style="background-color: #000;" data-ng-init="publicPostcard._id = ''">
 	<div data-ng-repeat="publicPostcard in postcards | orderBy:sortOption:true | filter:searchPostcards | limitTo:searchResults">
 		<a href="/mailbox.html?id={{ publicPostcard._id}}">
 			<div class="publicThumb">
