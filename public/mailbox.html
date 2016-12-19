@@ -21,7 +21,7 @@
 </head>
 <body style="opacity: 0;">
 
-<div ng-app="viewApp" ng-controller="viewCtrl">
+<div data-ng-app="viewApp" data-ng-controller="viewCtrl">
 
 	<!-- Logo & About button -->
 	<a href="index.html">
@@ -35,12 +35,12 @@
 	<div id="confirm"></div>
 
 	<!-- Container hint/answer input -->
-	<div ng-show="unlocked">
+	<div data-ng-show="unlocked">
 		<div class="vh-middle">
 			<div style="color: #fff; text-align: center;">
 				<p><strong>This postcard is locked.<br />Can you answer?</strong></p>
 				<p>{{ postcard.hint }}</p><br />
-				<input type="text" class="u-full-width" placeholder="Answer" ng-model="userAnswer" ng-keyup="unlock()">
+				<input type="text" class="u-full-width" placeholder="Answer" data-ng-model="userAnswer" data-ng-keyup="unlock()">
 			</div>
 		</div>
 	</div>
@@ -74,7 +74,7 @@
 	</div>
 
 	<!-- Show postcard / text+image -->
-	<div class="row" ng-init="unlocked = false" ng-hide="unlocked">
+	<div class="row" data-ng-init="unlocked = false" data-ng-hide="unlocked">
 		<div id="image-container">
 			<a href="{{ img }}" class="pop"><img id="mailbox-img" class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
 		</div>
