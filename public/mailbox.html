@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <title>PinkPostcards</title>
@@ -76,7 +76,7 @@
 	<!-- Show postcard / text+image -->
 	<div class="row" data-ng-init="unlocked = false" data-ng-hide="unlocked">
 		<div id="image-container">
-			<a href="{{ img }}" class="pop"><img id="mailbox-img" class="album-piece" src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
+			<a data-ng-href="{{ img }}" class="pop"><img id="mailbox-img" class="album-piece" data-ng-src="{{ img }}" alt="Postcard from {{ postcard.name }}" /></a>
 		</div>
 		<div id="text-container">
 			<p class="album-piece">

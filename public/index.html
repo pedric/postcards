@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-ng-app="postcardApp">
+<html data-ng-app="postcardApp" lang="en">
 <head>
   <meta charset="utf-8">
   <title>PinkPostcards</title>
@@ -120,7 +120,7 @@
 <!-- Show public postcards / ngRepeat->postcards -->
 <div class="row" style="background-color: #000;" data-ng-init="publicPostcard._id = ''">
 	<div data-ng-repeat="publicPostcard in postcards | orderBy:sortOption:true | filter:searchPostcards | limitTo:searchResults">
-		<a href="/mailbox.html?id={{ publicPostcard._id}}">
+		<a data-ng-href="/mailbox.html?id={{ publicPostcard._id }}">
 			<div class="publicThumb">
 				<div class="image-filter" data-ng-hide="publicPostcard.private" style="background-image: url({{ publicPostcard.image }});"><div class="color-filter"></div></div>
 				<div class="image-filter" data-ng-show="publicPostcard.private" style="background-image: url(img/private-placeholder.png);"><div class="color-filter"></div></div>
